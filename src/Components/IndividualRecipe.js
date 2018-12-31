@@ -5,24 +5,24 @@ class IndividualRecipe extends Component {
     constructor() {
         super();
         this.state = {
-            isFormHidden: true
+            isFormHidden: true,
+
         }
         this.handleDisplayRecipeForm = this.handleDisplayRecipeForm.bind(this);
     }
 
     handleDisplayRecipeForm() {
-        console.log("tryna add recipe");
         this.setState({
             isFormHidden: !this.state.isFormHidden
         })
-    }
+    }  
 
     render() {
         return (
             <div>
                 <h2>Individual Recipe</h2>
                 <button onClick={this.handleDisplayRecipeForm}>Add Recipe</button>
-                {!this.state.isFormHidden && <AddRecipe displayHandler={this.handleDisplayRecipeForm} />}
+                {!this.state.isFormHidden && <AddRecipe displayHandler={this.handleDisplayRecipeForm} addRecipe={this.props.updateList} />}
             </div>
         )
     }
