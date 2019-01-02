@@ -21,6 +21,9 @@ class IndividualRecipe extends Component {
         return (
             <div>
                 <h2>Individual Recipe</h2>
+
+                {this.props.currentRecipe}
+                
                 <button onClick={this.handleDisplayRecipeForm}>Add Recipe</button>
                 {!this.state.isFormHidden && <AddRecipe displayHandler={this.handleDisplayRecipeForm} addRecipe={this.props.updateList} />}
             </div>

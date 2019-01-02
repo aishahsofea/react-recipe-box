@@ -13,10 +13,13 @@ class AddRecipe extends Component {
 
     handleSubmit(event) {
         this.setState({newRecipe: {
-            name: this.refs.name.value,
+            name: this.refs.name.value.toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' '),
             id: uuid.v4(),
-            ingredients: '',
-            instructions: ''
+            ingredients: this.refs.ingredients.value,
+            instructions: this.refs.instructions.value
         }}, function(){
             this.props.addRecipe(this.state.newRecipe);
         })
@@ -35,11 +38,11 @@ class AddRecipe extends Component {
                     </div>
                     <div>
                         <label>Ingredients</label>
-                        <input type="ingredients" />
+                        <textarea type="text" ref="ingredients"></textarea>
                     </div>
                     <div>
                         <label>Instructions</label>
-                        <input type="instructions" />
+                        <textarea type="text" ref="instructions"></textarea>
                     </div>       
                     
                     <input type="submit" value="Add" />
