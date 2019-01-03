@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import $ from 'jquery';
+import uuid from 'uuid';
 
-class AddRecipe extends Component {
+class EditModal extends Component {
+
     constructor() {
         super();
         this.state = {
@@ -56,11 +57,12 @@ class AddRecipe extends Component {
 
     }
 
+    
+
     render() {
-
-
-
         return (
+
+            
                    
             <div>
                 <form onSubmit={this.handleSubmit} ref={(ref) => this.formRef = ref} >
@@ -78,7 +80,7 @@ class AddRecipe extends Component {
                         <textarea type="text" ref="instructions"></textarea>
                     </div>       
                     
-                    <input type="submit" value="Add" />
+                    <input type="submit" value="Save" />
                     <button onClick={this.props.closeModal}>Close</button>
                      
                 </form>               
@@ -87,5 +89,4 @@ class AddRecipe extends Component {
     }
 }
 
-export default AddRecipe;
-
+export default EditModal;

@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
+import Popup from 'reactjs-popup';
 import AddRecipe from './AddRecipe';
+import './IndividualRecipe.css';
+import EditModal from './EditModal';
 
 class IndividualRecipe extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isFormHidden: true,
-
-        }
-        this.handleDisplayRecipeForm = this.handleDisplayRecipeForm.bind(this);
-    }
-
-    handleDisplayRecipeForm() {
-        this.setState({
-            isFormHidden: !this.state.isFormHidden
-        })
-    }  
 
     render() {
         return (
-            <div>
-                <h2>Individual Recipe</h2>
+            <div className="individual-recipe">
+
+                <button onClick={this.props.removeRecipe}>Delete</button>
+                <Popup trigger={<button>Edit Recipe</button>} modal >
+                    {close => (<EditModal closeModal={() => close()} addRecipe={this.props.updateList}/>)}                
+                </Popup>
+                
 
                 {this.props.currentRecipe}
-                
-                <button onClick={this.handleDisplayRecipeForm}>Add Recipe</button>
-                {!this.state.isFormHidden && <AddRecipe displayHandler={this.handleDisplayRecipeForm} addRecipe={this.props.updateList} />}
+                <Popup trigger={<button>Add Recipe</button>} modal >
+                    {close => (<AddRecipe closeModal={() => close()} addRecipe={this.props.updateList}/>)}                
+                </Popup>
+
             </div>
         )
     }

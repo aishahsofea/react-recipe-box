@@ -15,6 +15,7 @@ class App extends Component {
     this.updateRecipe = this.updateRecipe.bind(this);
     this.selectedRecipe = this.selectedRecipe.bind(this);
     this.displayCurrentRecipe = this.displayCurrentRecipe.bind(this);
+    this.removeRecipe = this.removeRecipe.bind(this);
   }
 
   componentWillMount() {
@@ -22,7 +23,7 @@ class App extends Component {
         {
           name: 'Beef Lasagna',
           id: uuid.v4(),
-          ingredients: ' ',
+          ingredients: 'beef',
           instructions: ' '
         },
         {
@@ -56,6 +57,18 @@ class App extends Component {
     console.log(this.state);
 }
 
+  removeRecipe(recipe) {
+    let filteredRecipe = this.state.recipes.filter((recipe) => recipe.name !== this.state.display.name);
+    this.setState({
+      recipes: filteredRecipe,
+      display: {
+        name: filteredRecipe[0].name,
+        ingredients: filteredRecipe[0].ingredients,
+        instructions: filteredRecipe[0].instructions
+      }
+    })
+  }
+
   displayCurrentRecipe(event) {
     let filtered = this.state.recipes.filter((recipe) => recipe.name === event.target.textContent)[0];
     console.log(filtered.name);
@@ -71,8 +84,10 @@ class App extends Component {
     return (
       <div>
         <h4>{this.state.display.name}</h4>
+
         <h5>Ingredients:</h5>
         <p>{this.state.display.ingredients}</p>
+        
         <h5>Instructions:</h5>
         <p>{this.state.display.instructions}</p>
       </div>
@@ -84,10 +99,13 @@ class App extends Component {
     let CurrentRecipe = this.selectedRecipe;
 
     return(
-      <div>
-        <div>TIS MA APPP</div>
-        <RecipeList recipes={this.state.recipes} displayRecipe={this.displayCurrentRecipe} />
-        <IndividualRecipe updateList={this.updateRecipe} currentRecipe={<CurrentRecipe/>} />
+      <div className="app">
+        <div className="app-content">
+          <div className="app-title">RECIPE BOX</div>
+          <RecipeList recipes={this.state.recipes} displayRecipe={this.displayCurrentRecipe} />
+          <IndividualRecipe updateList={this.updateRecipe} currentRecipe={<CurrentRecipe/>} removeRecipe={this.removeRecipe} />    
+        </div>
+                                 
       </div>
       
     );
